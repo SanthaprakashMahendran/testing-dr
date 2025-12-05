@@ -5,10 +5,16 @@ pipeline {
             args '-u root'
         }
     }
+
+    options {
+        skipDefaultCheckout()   // IMPORTANT
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/SanthaprakashMahendran/testing-dr.git'
+                sh 'git --version'
+                sh 'git clone -b main https://github.com/SanthaprakashMahendran/testing-dr.git .'
             }
         }
     }
