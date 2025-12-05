@@ -6,10 +6,9 @@ pipeline {
         }
     }
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                sh 'echo Running inside local Docker agent'
-                sh 'python3 --version'
+                git 'https://github.com/SanthaprakashMahendran/testing-dr.git'
             }
         }
     }
