@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'google/cloud-sdk:latest'
+            image 'base:v1'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
