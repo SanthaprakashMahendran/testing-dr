@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'base:v1'
+            image 'google/cloud-sdk:latest'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
@@ -11,14 +11,14 @@ pipeline {
         REGION     = "asia-south1"
         REPO       = "Dr_Images"
         IMAGE_NAME = "myapp"
-        IMAGE_TAG  = "v${BUILD_NUMBER}"  // Use Jenkins build number as tag
+        IMAGE_TAG  = "project-d1bd05ab-4df5-4a42-847"
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git 'git@github.com:SanthaprakashMahendran/testing-dr.git'
+                git 'https://github.com/SanthaprakashMahendran/testing-dr.git'
             }
         }
 
