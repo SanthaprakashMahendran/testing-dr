@@ -2,19 +2,22 @@ pipeline {
     agent {
         docker {
             image 'gcp-image:v1'
-            args '-u root'
+            args '--user=root'
         }
-    }
-
-    options {
-        skipDefaultCheckout()   // IMPORTANT
     }
 
     stages {
         stage('Checkout') {
             steps {
+                checkout scm
+            }
+        }
+
+        stage('Test Inside Container') {
+            steps {
+                sh 'which git'
                 sh 'git --version'
-                sh 'git clone -b main https://github.com/SanthaprakashMahendran/testing-dr.git .'
+                sh 'ls -l'
             }
         }
     }
