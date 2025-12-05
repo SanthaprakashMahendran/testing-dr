@@ -11,21 +11,14 @@ pipeline {
         REGION     = "asia-south1"
         REPO       = "Dr_Images"
         IMAGE_NAME = "myapp"
-        IMAGE_TAG  = "project-d1bd05ab-4df5-4a42-847"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
     }
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/SanthaprakashMahendran/testing-dr.git'
-            }
-        }
-
         stage('Authenticate to GCP') {
             steps {
                 sh '''
-                    # Using VM's default service account
                     gcloud auth list
                     gcloud config set project ${PROJECT_ID}
                     gcloud config set compute/region ${REGION}
