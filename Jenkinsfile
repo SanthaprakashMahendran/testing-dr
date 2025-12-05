@@ -13,11 +13,14 @@ pipeline {
             }
         }
 
-        stage('Test Inside Container') {
+       stage('Authenticate to GCP') {
             steps {
-                sh 'which git'
-                sh 'git --version'
-                sh 'ls -l'
+                sh '''
+                    # Using VM's default service account
+                    gcloud auth list
+                    gcloud config set project ${PROJECT_ID}
+                    gcloud config set compute/region ${REGION}
+                '''
             }
         }
     }
