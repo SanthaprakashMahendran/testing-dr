@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-           image 'base:v4'
-        args '-u 105:109 -v /var/run/docker.sock:/var/run/docker.sock'
+            image 'gcp-image:v1 '
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 
@@ -11,14 +11,21 @@ pipeline {
         REGION     = "asia-south1"
         REPO       = "Dr_Images"
         IMAGE_NAME = "myapp"
-        IMAGE_TAG  = "${BUILD_NUMBER}"
+        IMAGE_TAG  = "project-d1bd05ab-4df5-4a42-847"
     }
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/SanthaprakashMahendran/testing-dr.git'
+            }
+        }
+
         stage('Authenticate to GCP') {
             steps {
                 sh '''
+                    # Using VM's default service account
                     gcloud auth list
                     gcloud config set project ${PROJECT_ID}
                     gcloud config set compute/region ${REGION}
