@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'base:v3'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+           image 'base:v4'
+        args '-u 105:109 -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 
